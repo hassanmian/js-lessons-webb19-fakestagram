@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect} from 'react';
+import 'bootstrap/dist/css/bootstrap.css'
+import ImageList from './components/ImageList';
 
 function App() {
+  const [data, setData] = useState([])
+
+  function handleFetchImages() {
+    fetch("https://image-mock-data.firebaseio.com/images.json")
+    .then(res => res.json())
+    .then(result => {
+      setData(result)
+    })
+  }
+
+  useEffect(() => {
+    handleFetchImages()
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <ImageList images={data} />
     </div>
   );
 }
