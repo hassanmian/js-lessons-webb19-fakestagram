@@ -2,8 +2,11 @@ import React, {useEffect, useState} from 'react'
 import CommentForm from './CommentForm'
 import CommentItem from './CommentItem'
 
+import firebase from "../../firebase"
 export default function CommentList(props) {
   const [commentListData, setCommentListData] = useState(null)
+  const database = firebase.database()
+  const commentRef = database.ref(props.url)
   
 
   useEffect( () => {
