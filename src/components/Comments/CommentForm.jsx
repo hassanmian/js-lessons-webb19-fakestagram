@@ -1,17 +1,16 @@
 import React, { useState } from 'react'
+import firebase from "../../firebase"
 
 export default function CommentForm(props) {
   const [messageInputData, setMessageInputData] = useState("")
 
+  const database = firebase.database()
+  const commentRef = database.ref(props.url)
+
   function handlePostMessage(e) {
     e.preventDefault()
-    fetch(props.url, {
-      method: "POST",
-      body: JSON.stringify({message: messageInputData})
-    }).then(res => {
-      props.handleOnSuccess()
-      setMessageInputData("")
-    })
+    commentRef.push({message: messageInputData})
+    setMessageInputData("")
   }
 
   return (
