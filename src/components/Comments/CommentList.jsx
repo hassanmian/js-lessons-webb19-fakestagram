@@ -5,13 +5,6 @@ import CommentItem from './CommentItem'
 export default function CommentList(props) {
   const [commentListData, setCommentListData] = useState(null)
   
-  function fetchCommentList() {
-    fetch(props.url)
-    .then(res => res.json())
-    .then(data => {
-      setCommentListData(data)
-    })
-  }
 
   useEffect( () => {
     fetchCommentList()
@@ -19,7 +12,7 @@ export default function CommentList(props) {
 
   return (
     <div>
-      <CommentForm url={props.url} handleOnSuccess={fetchCommentList}/>
+      <CommentForm url={props.url}/>
       {commentListData && Object.entries(commentListData).reverse().map((commentItemData, index) => {
         return <CommentItem key={index} itemData={commentItemData[1]} />
       })}
