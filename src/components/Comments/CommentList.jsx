@@ -12,7 +12,6 @@ export default function CommentList(props) {
 
   useEffect( () => {
     commentRef.on('value', snapshot => {
-      console.log(snapshot.val())
       setCommentListData(snapshot.val())
     })
   }, [] )
