@@ -4,7 +4,7 @@ import CommentList from './Comments/CommentList'
 export default function ImageItem(props) {
   const [likes, setLikes] = useState(props.image.likes)
 
-  const commentURL = `https://image-mock-data.firebaseio.com/comments/${props.index}.json`
+  const commentURL = `comments/${props.index}`
 
   function handleOnClick() {
     if(props.image.likes === likes) {
